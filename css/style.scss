@@ -1,0 +1,501 @@
+@import '_device_mixin';
+
+@font-face {
+    font-family: 'Tenor Sans';
+    src: url('/css/font/TenorSans.eot');
+    src: local('Tenor Sans'), local('TenorSans'),
+        url('../css/font/TenorSans.eot?#iefix') format('embedded-opentype'),
+        url('../css/font/TenorSans.woff2') format('woff2'),
+        url('../css/font/TenorSans.woff') format('woff'),
+        url('../css/font/TenorSans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('/css/font/IBMPlexSans.eot');
+    src: local('IBM Plex Sans'), local('IBMPlexSans'),
+        url('../css/font/IBMPlexSans.eot?#iefix') format('embedded-opentype'),
+        url('../css/font/IBMPlexSans.woff2') format('woff2'),
+        url('../css/font/IBMPlexSans.woff') format('woff'),
+        url('../css/font/IBMPlexSans.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    transition: all .2s ease-in;
+}
+
+button {
+    outline: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    background: #ffffff;
+    display: flex;
+    font-family: 'Tenor Sans', sans-serif;
+    min-height: 100vh;
+
+    @include xSmall {
+        flex-direction: column;
+    }
+}
+
+.container {
+    max-width: 978px;
+    margin: 0px auto;
+}
+
+.block {
+    width: 100%;
+    background: #ffffff;
+}
+
+//Header
+.header {
+    max-width: 300px;
+    position: relative;
+    width: 100%;
+    background: url('../img/Rings.svg'), radial-gradient(160.65% 47.4% at 93% 52.6%, #482C98 0%, rgba(45, 30, 136, 0) 100%), #06054A;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+    @include Small {
+        max-width: 250px;
+    }
+
+    @include xSmall {
+        max-width: unset;
+        width: 100%;
+        background: radial-gradient(93.2% 1204.95% at 79.33% 383.02%, #482C98 0%, rgba(45, 30, 136, 0) 100%), #06054A;
+    }
+
+    .logo-holder {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px 30px;
+
+        @include Small {
+            padding: 25px 10px;
+        }
+
+        @include xSmall {
+            padding: 11px 15px;
+        }
+
+        &__images {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+
+            @include xSmall {
+                width: 150px;
+            }
+
+            .logo {
+                @include xSmall {
+                    width: 100px;
+                }
+            }
+
+            .beta {
+                @include xSmall {
+                    width: 38px;
+                }
+            }
+        }
+
+        //Mobile burger
+        .menu-icon-wrapper {
+            display: none;
+            width: 30px;
+            height: 30px;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(180deg);
+
+            @include xSmall {
+                display: flex;
+            }
+
+            .menu-icon {
+                position: relative;
+                width: 18px;
+                height: 2px;
+                transition: all .2s linear;
+                background-color: #fff;
+
+                &.menu-icon-active {
+                    background-color: transparent;
+                    transition: all .2s linear;
+                }
+
+                &::before {
+                    position: absolute;
+                    left: 0;
+                    top: -10px;
+                    content: '';
+                    width: 25px;
+                    height: 2px;
+                    background-color: #fff;
+                    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+                }
+
+                &::after {
+                    position: absolute;
+                    left: 0;
+                    top: 10px;
+                    content: '';
+                    width: 30px;
+                    height: 2px;
+                    background-color: #fff;
+                    transition: transform 0.2s ease-in, top 0.2s linear 0.2s;
+                }
+
+                &.menu-icon-active::before {
+                    transform: rotate(45deg);
+                    top: 0;
+                    width: 30px;
+                    transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+                }
+
+                &.menu-icon-active::after {
+                    transform: rotate(-45deg);
+                    top: 0;
+                    width: 30px;
+                    transition: top 0.2s linear, transform 0.2s ease-in 0.2s;
+                }
+            }
+        }
+
+    }
+
+    //Main menu
+    .nav {
+        margin: 150px auto 0;
+        display: flex;
+        flex-direction: column;
+
+        @include Small {
+            margin-top: 120px;
+        }
+
+        @include xSmall {
+            display: none;
+            margin: 86px auto 100px;
+        }
+
+        &__link {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            line-height: 25px;
+            text-transform: capitalize;
+            margin-top: -2px;
+
+            &:hover {
+                background: #433E8D;
+            }
+
+            .link-name {
+                width: calc(100% - 30px);
+                position: relative;
+                margin-left: auto;
+                font-size: 20px;
+                line-height: 25px;
+                border-bottom: 1px solid #433E8D;
+                padding: 10px 0;
+
+                &.arrowed:after {
+                    content: '';
+                    background-repeat: no-repeat;
+                    width: 16px;
+                    background-image: url(../img/arrow.svg);
+                    height: 10px;
+                    display: block;
+                    background-size: contain;
+                    position: absolute;
+                    right: 30px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                &.active {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    //Header footer
+    .anotation {
+        position: absolute;
+        bottom: 25px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        font-feature-settings: 'tnum'on, 'lnum'on;
+        color: #ACADC1;
+        padding-left: 30px;
+
+        @include xSmall {
+            display: none;
+        }
+    }
+
+    &.mobile-openned {
+        .nav {
+            display: flex;
+        }
+
+        .anotation {
+            display: block;
+        }
+    }
+}
+
+//Main content
+.main {
+    padding: 36px 45px;
+    width: 100%;
+
+    @include xSmall {
+        padding: 17px;
+    }
+
+    //Block title
+    &__header {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        list-style: none;
+        padding: 0;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+
+        h4 {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 50px;
+            line-height: 110%;
+            color: #2F2949;
+            display: flex;
+
+            @include xSmall {
+                font-size: 30px;
+                line-height: 110%;
+            }
+        }
+
+        //Buttons for size of items
+        &__btn {
+            display: flex;
+
+            button {
+                width: 40px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #FFFFFF;
+                border: 1px solid #52458A;
+                box-sizing: border-box;
+                cursor: pointer;
+
+                img {
+                    width: 15px;
+                    height: 15px;
+                }
+
+                &:nth-child(2),
+                &:nth-child(3) {
+                    border: none;
+                    background: #F0F1FA;
+                    cursor: no-drop;
+                }
+
+                &.active-list {
+                    background: #52458A;
+                }
+            }
+
+        }
+    }
+
+    //Container for elements
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 29px;
+        padding-bottom: 45px;
+
+        @include xSmall {
+            padding-top: 19px;
+            padding-bottom: 25px;
+        }
+
+        //Items
+        .product {
+            border: 1px solid #DDDDDD;
+            box-sizing: border-box;
+            cursor: pointer;
+            padding: 93px 0 43px;
+
+            @include Small {
+                padding: 43px 0 20px;
+            }
+
+            @include xSmall {
+                padding: 55px 0 33px;
+            }
+
+            &.four-block-list {
+                width: 25%;
+
+                @include Medium {
+                    width: 33.3%;
+                }
+
+                @include Small {
+                    width: 50%;
+                }
+
+                @include xSmall {
+                    width: 50%;
+                }
+            }
+
+            &.three-block-list {
+                width: 33.3%;
+
+                @include Medium {
+                    width: 50%;
+                }
+
+                @include Small {
+                    width: 50%;
+                }
+
+                @include xSmall {
+                    width: 100%;
+                }
+            }
+
+            &.two-block-list {
+                width: 50%;
+            }
+
+            &.one-block-list {
+                width: 90%;
+                display: block;
+                margin: 0px auto;
+            }
+
+            img {
+                margin: 0px auto;
+                display: block;
+                margin-bottom: 88px;
+
+                @include Small {
+                    margin-bottom: 43px;
+                }
+
+                @include xSmall {
+                    margin-bottom: 50px;
+                }
+            }
+
+            h6 {
+                font-style: normal;
+                font-weight: normal;
+                font-size: 20px;
+                position: relative;
+                line-height: 25px;
+                color: #2F2949;
+                padding: 0 15px;
+                display: flex;
+                align-items: center;
+
+                @include xSmall {
+                    font-size: 16px;
+                    padding: 0 22px;
+                }
+
+                &:after {
+                    content: '';
+                    display: none;
+                    background-repeat: no-repeat;
+                    width: 16px;
+                    background-image: url(../img/arrow_b.svg);
+                    height: 10px;
+                    background-size: contain;
+                    margin-left: 20px;
+                }
+            }
+
+            p {
+                font-family: 'IBM Plex Sans', sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 25px;
+                color: #777777;
+                padding: 0 15px;
+
+                @include xSmall {
+                    font-size: 13px;
+                    line-height: 15px;
+                    padding: 0 22px;
+                }
+            }
+
+            &:hover {
+                background: #FFFFFF;
+                border: 1px solid #52458A;
+                box-sizing: border-box;
+                box-shadow: 0px 5px 20px rgba(82, 69, 138, 0.3);
+
+                h6:after {
+                    display: block;
+
+                    @include xSmall {
+                        display: none;
+                    }
+                }
+
+            }
+        }
+    }
+
+    &__footer {
+        p {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 25px;
+            color: #2F2949;
+            max-width: 691px;
+            width: 100%;
+        }
+    }
+}
